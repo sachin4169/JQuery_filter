@@ -43,27 +43,7 @@ var table = `<table>
 	<th>Operating System</th>
 	<th>Remove</th>
 </tr>`
-function display(){
-	var list ="";
-	var brand ="";
-	var os = "";
-	products.forEach(element => {
-		list += ` <tr>
-		<td>${element.id}</td>
-		<td>${element.name}</td>
-		<td>${element.brand}</td>
-		<td>${element.os}</td>
-		<td class="remove" id="${element.id}">X</td>
-		</tr>`;
 
-		brand += `<option>${element.brand}</option>`
-		os += `<option>${element.os}</option>`
-	});
-	$("#product_table").empty();
-	$("#product_table").append(table+list+"</table>");
-	$("#brand").append(brand);
-	$("#os").append(os);
-}
 $(document).ready(function(){
 	display();
 
@@ -82,28 +62,68 @@ $(document).ready(function(){
 		$(`#${id}`).parent().hide();
 	})
 });
+	var brand = new Set();
+	var os = new Set();
+function display(){
+	var list ="";
+	var brandval = ""
+	var osval
+	products.forEach(element => {
+		list += ` <tr>
+		<td>${element.id}</td>
+		<td>${element.name}</td>
+		<td>${element.brand}</td>
+		<td>${element.os}</td>
+		<td class="remove" id="${element.id}">X</td>
+		</tr>`;
+
+		
+		
+		brand.add(element.brand);
+		os.add(element.os);
+	});
+	$("#product_table").empty();
+	$("#product_table").append(table+list+"</table>");
+	os.forEach(element => {
+		// console.log(element);
+		osval += `<option>${element}</option>`
+	});
+	brand.forEach(element => {
+		// console.log(element);
+		brandval += `<option>${element}</option>`
+	});
+	$("#brand").append(brandval);
+	$("#os").append(osval);
+}
 
 function sorting(){
 	var brand = $("#brand").val();
-	// console.log(brand);
+	console.log(brand);
 	var os = $("#os").val();
-	// console.log(os);
+	console.log(os);
+	var count = 0;
 	if(os != "" && brand != ""){
 		shortlist = [];
+		
 		products.forEach(element => {
 			if(element.brand == brand && element.os == os){
-				console.log("name"+ element.name+"brand: "+ element.brand +" os:"+ element.os);
+				// console.log("name"+ element.name+"brand: "+ element.brand +" os:"+ element.os);
 				shortlist.push(element);
 				sortdisplay()
+				count =1;
 			}
 		});
+		if(count == 0){
+			shortlist = [];
+			sortdisplay();
+		}
 	}
 	else if(brand != "" && os == "" ){
 		shortlist = [];
 		console.log("brand");
 		products.forEach(element => {
 			if(element.brand == brand){
-				console.log("name"+ element.name+"brand: "+ element.brand +" os:"+ element.os);
+				// console.log("name"+ element.name+"brand: "+ element.brand +" os:"+ element.os);
 				shortlist.push(element);
 				sortdisplay()
 			}
@@ -114,7 +134,7 @@ function sorting(){
 		console.log("os");
 		products.forEach(element => {
 			if(element.os == os){
-				console.log("name"+ element.name+"brand: "+ element.brand +" os:"+ element.os);
+				// console.log("name"+ element.name+"brand: "+ element.brand +" os:"+ element.os);
 				shortlist.push(element);
 				sortdisplay()
 			}
