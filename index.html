@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>JQuery-Filter</title>
+    <style>
+        .product_table{
+            padding: 20px;
+            width: 80%;
+            margin: auto;
+        }
+        table{
+            width: 100%;
+            text-align: center;
+        }
+        th,td{
+            padding: 10px;
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
-    
+    <select id="brand">
+        <option value="">--select brand--</option>
+        
+    </select>
+    <select id="os">
+        <option value="">--select os---</option>
+    </select>
+    <div id="product_table">
+      
+    </div>
+    <input type="text" id="name" placeholder="Enter the name of products">
+
+    <script src="products.js"></script>
 </body>
 </html>
